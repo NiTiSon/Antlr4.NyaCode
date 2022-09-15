@@ -1,6 +1,6 @@
 lexer grammar NyaCodeLexer;
 
-channels { COMMENTS_CHANNEL, DIRECTIVE }
+channels { COMMENTS_CHANNEL }
 
 options { superClass = NyaCodeLexerBase; }
 
@@ -9,8 +9,11 @@ MULTILINE_COMMENT: '/*' .*? '*/' InputCharacter* -> channel(COMMENTS_CHANNEL);
 
 WHITESPACES: (Whitespace | NewLine)+ -> channel(HIDDEN);
 
-NYA: 'nya' { Nya(); };
+STATEMENT: NYA? SEMICOLON;
 
+NYA: 'nya';
+
+SEMICOLON: ';';
 LEFT_PARE: '(';
 RIGHT_PARE: ')';
 

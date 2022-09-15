@@ -16,12 +16,12 @@ public class NyaCodeLexer extends NyaCodeLexerBase {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		SINGLELINE_COMMENT=1, MULTILINE_COMMENT=2, WHITESPACES=3, NYA=4, LEFT_PARE=5, 
-		RIGHT_PARE=6;
+		SINGLELINE_COMMENT=1, MULTILINE_COMMENT=2, WHITESPACES=3, STATEMENT=4, 
+		NYA=5, SEMICOLON=6, LEFT_PARE=7, RIGHT_PARE=8;
 	public static final int
-		COMMENTS_CHANNEL=2, DIRECTIVE=3;
+		COMMENTS_CHANNEL=2;
 	public static String[] channelNames = {
-		"DEFAULT_TOKEN_CHANNEL", "HIDDEN", "COMMENTS_CHANNEL", "DIRECTIVE"
+		"DEFAULT_TOKEN_CHANNEL", "HIDDEN", "COMMENTS_CHANNEL"
 	};
 
 	public static String[] modeNames = {
@@ -30,22 +30,23 @@ public class NyaCodeLexer extends NyaCodeLexerBase {
 
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"SINGLELINE_COMMENT", "MULTILINE_COMMENT", "WHITESPACES", "NYA", "LEFT_PARE", 
-			"RIGHT_PARE", "InputCharacter", "NewLine", "Whitespace", "UnicodeClassZS"
+			"SINGLELINE_COMMENT", "MULTILINE_COMMENT", "WHITESPACES", "STATEMENT", 
+			"NYA", "SEMICOLON", "LEFT_PARE", "RIGHT_PARE", "InputCharacter", "NewLine", 
+			"Whitespace", "UnicodeClassZS"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, null, null, null, "'nya'", "'('", "')'"
+			null, null, null, null, null, "'nya'", "';'", "'('", "')'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, "SINGLELINE_COMMENT", "MULTILINE_COMMENT", "WHITESPACES", "NYA", 
-			"LEFT_PARE", "RIGHT_PARE"
+			null, "SINGLELINE_COMMENT", "MULTILINE_COMMENT", "WHITESPACES", "STATEMENT", 
+			"NYA", "SEMICOLON", "LEFT_PARE", "RIGHT_PARE"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -106,47 +107,33 @@ public class NyaCodeLexer extends NyaCodeLexerBase {
 	@Override
 	public ATN getATN() { return _ATN; }
 
-	@Override
-	public void action(RuleContext _localctx, int ruleIndex, int actionIndex) {
-		switch (ruleIndex) {
-		case 3:
-			NYA_action((RuleContext)_localctx, actionIndex);
-			break;
-		}
-	}
-	private void NYA_action(RuleContext _localctx, int actionIndex) {
-		switch (actionIndex) {
-		case 0:
-			 Nya(); 
-			break;
-		}
-	}
-
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\2\bU\b\1\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\2\n^\b\1\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
-		"\13\3\2\3\2\3\2\3\2\7\2\34\n\2\f\2\16\2\37\13\2\3\2\3\2\3\3\3\3\3\3\3"+
-		"\3\7\3\'\n\3\f\3\16\3*\13\3\3\3\3\3\3\3\3\3\7\3\60\n\3\f\3\16\3\63\13"+
-		"\3\3\3\3\3\3\4\3\4\6\49\n\4\r\4\16\4:\3\4\3\4\3\5\3\5\3\5\3\5\3\5\3\5"+
-		"\3\6\3\6\3\7\3\7\3\b\3\b\3\t\3\t\3\t\5\tN\n\t\3\n\3\n\5\nR\n\n\3\13\3"+
-		"\13\3(\2\f\3\3\5\4\7\5\t\6\13\7\r\b\17\2\21\2\23\2\25\2\3\2\5\6\2\f\f"+
-		"\17\17\u0087\u0087\u202a\u202b\4\2\13\13\r\16\13\2\"\"\u00a2\u00a2\u1682"+
-		"\u1682\u1810\u1810\u2002\u2008\u200a\u200c\u2031\u2031\u2061\u2061\u3002"+
-		"\u3002\2W\2\3\3\2\2\2\2\5\3\2\2\2\2\7\3\2\2\2\2\t\3\2\2\2\2\13\3\2\2\2"+
-		"\2\r\3\2\2\2\3\27\3\2\2\2\5\"\3\2\2\2\78\3\2\2\2\t>\3\2\2\2\13D\3\2\2"+
-		"\2\rF\3\2\2\2\17H\3\2\2\2\21M\3\2\2\2\23Q\3\2\2\2\25S\3\2\2\2\27\30\7"+
-		"\61\2\2\30\31\7\61\2\2\31\35\3\2\2\2\32\34\5\17\b\2\33\32\3\2\2\2\34\37"+
-		"\3\2\2\2\35\33\3\2\2\2\35\36\3\2\2\2\36 \3\2\2\2\37\35\3\2\2\2 !\b\2\2"+
-		"\2!\4\3\2\2\2\"#\7\61\2\2#$\7,\2\2$(\3\2\2\2%\'\13\2\2\2&%\3\2\2\2\'*"+
-		"\3\2\2\2()\3\2\2\2(&\3\2\2\2)+\3\2\2\2*(\3\2\2\2+,\7,\2\2,-\7\61\2\2-"+
-		"\61\3\2\2\2.\60\5\17\b\2/.\3\2\2\2\60\63\3\2\2\2\61/\3\2\2\2\61\62\3\2"+
-		"\2\2\62\64\3\2\2\2\63\61\3\2\2\2\64\65\b\3\2\2\65\6\3\2\2\2\669\5\23\n"+
-		"\2\679\5\21\t\28\66\3\2\2\28\67\3\2\2\29:\3\2\2\2:8\3\2\2\2:;\3\2\2\2"+
-		";<\3\2\2\2<=\b\4\3\2=\b\3\2\2\2>?\7p\2\2?@\7{\2\2@A\7c\2\2AB\3\2\2\2B"+
-		"C\b\5\4\2C\n\3\2\2\2DE\7*\2\2E\f\3\2\2\2FG\7+\2\2G\16\3\2\2\2HI\n\2\2"+
-		"\2I\20\3\2\2\2JK\7\17\2\2KN\7\f\2\2LN\t\2\2\2MJ\3\2\2\2ML\3\2\2\2N\22"+
-		"\3\2\2\2OR\5\25\13\2PR\t\3\2\2QO\3\2\2\2QP\3\2\2\2R\24\3\2\2\2ST\t\4\2"+
-		"\2T\26\3\2\2\2\n\2\35(\618:MQ\5\2\4\2\2\3\2\3\5\2";
+		"\13\4\f\t\f\4\r\t\r\3\2\3\2\3\2\3\2\7\2 \n\2\f\2\16\2#\13\2\3\2\3\2\3"+
+		"\3\3\3\3\3\3\3\7\3+\n\3\f\3\16\3.\13\3\3\3\3\3\3\3\3\3\7\3\64\n\3\f\3"+
+		"\16\3\67\13\3\3\3\3\3\3\4\3\4\6\4=\n\4\r\4\16\4>\3\4\3\4\3\5\5\5D\n\5"+
+		"\3\5\3\5\3\6\3\6\3\6\3\6\3\7\3\7\3\b\3\b\3\t\3\t\3\n\3\n\3\13\3\13\3\13"+
+		"\5\13W\n\13\3\f\3\f\5\f[\n\f\3\r\3\r\3,\2\16\3\3\5\4\7\5\t\6\13\7\r\b"+
+		"\17\t\21\n\23\2\25\2\27\2\31\2\3\2\5\6\2\f\f\17\17\u0087\u0087\u202a\u202b"+
+		"\4\2\13\13\r\16\13\2\"\"\u00a2\u00a2\u1682\u1682\u1810\u1810\u2002\u2008"+
+		"\u200a\u200c\u2031\u2031\u2061\u2061\u3002\u3002\2a\2\3\3\2\2\2\2\5\3"+
+		"\2\2\2\2\7\3\2\2\2\2\t\3\2\2\2\2\13\3\2\2\2\2\r\3\2\2\2\2\17\3\2\2\2\2"+
+		"\21\3\2\2\2\3\33\3\2\2\2\5&\3\2\2\2\7<\3\2\2\2\tC\3\2\2\2\13G\3\2\2\2"+
+		"\rK\3\2\2\2\17M\3\2\2\2\21O\3\2\2\2\23Q\3\2\2\2\25V\3\2\2\2\27Z\3\2\2"+
+		"\2\31\\\3\2\2\2\33\34\7\61\2\2\34\35\7\61\2\2\35!\3\2\2\2\36 \5\23\n\2"+
+		"\37\36\3\2\2\2 #\3\2\2\2!\37\3\2\2\2!\"\3\2\2\2\"$\3\2\2\2#!\3\2\2\2$"+
+		"%\b\2\2\2%\4\3\2\2\2&\'\7\61\2\2\'(\7,\2\2(,\3\2\2\2)+\13\2\2\2*)\3\2"+
+		"\2\2+.\3\2\2\2,-\3\2\2\2,*\3\2\2\2-/\3\2\2\2.,\3\2\2\2/\60\7,\2\2\60\61"+
+		"\7\61\2\2\61\65\3\2\2\2\62\64\5\23\n\2\63\62\3\2\2\2\64\67\3\2\2\2\65"+
+		"\63\3\2\2\2\65\66\3\2\2\2\668\3\2\2\2\67\65\3\2\2\289\b\3\2\29\6\3\2\2"+
+		"\2:=\5\27\f\2;=\5\25\13\2<:\3\2\2\2<;\3\2\2\2=>\3\2\2\2><\3\2\2\2>?\3"+
+		"\2\2\2?@\3\2\2\2@A\b\4\3\2A\b\3\2\2\2BD\5\13\6\2CB\3\2\2\2CD\3\2\2\2D"+
+		"E\3\2\2\2EF\5\r\7\2F\n\3\2\2\2GH\7p\2\2HI\7{\2\2IJ\7c\2\2J\f\3\2\2\2K"+
+		"L\7=\2\2L\16\3\2\2\2MN\7*\2\2N\20\3\2\2\2OP\7+\2\2P\22\3\2\2\2QR\n\2\2"+
+		"\2R\24\3\2\2\2ST\7\17\2\2TW\7\f\2\2UW\t\2\2\2VS\3\2\2\2VU\3\2\2\2W\26"+
+		"\3\2\2\2X[\5\31\r\2Y[\t\3\2\2ZX\3\2\2\2ZY\3\2\2\2[\30\3\2\2\2\\]\t\4\2"+
+		"\2]\32\3\2\2\2\13\2!,\65<>CVZ\4\2\4\2\2\3\2";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

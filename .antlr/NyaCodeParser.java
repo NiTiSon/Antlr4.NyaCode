@@ -16,7 +16,8 @@ public class NyaCodeParser extends NyaCodeParserBase {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		SINGLELINE_COMMENT=1, MULTILINE_COMMENT=2, WHITESPACES=3, NYA=4;
+		SINGLELINE_COMMENT=1, MULTILINE_COMMENT=2, WHITESPACES=3, STATEMENT=4, 
+		NYA=5, SEMICOLON=6, LEFT_PARE=7, RIGHT_PARE=8;
 	public static final int
 		RULE_compilation_unit = 0;
 	private static String[] makeRuleNames() {
@@ -28,13 +29,14 @@ public class NyaCodeParser extends NyaCodeParserBase {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, null, null, null, "'nya'"
+			null, null, null, null, null, "'nya'", "';'", "'('", "')'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, "SINGLELINE_COMMENT", "MULTILINE_COMMENT", "WHITESPACES", "NYA"
+			null, "SINGLELINE_COMMENT", "MULTILINE_COMMENT", "WHITESPACES", "STATEMENT", 
+			"NYA", "SEMICOLON", "LEFT_PARE", "RIGHT_PARE"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -90,9 +92,9 @@ public class NyaCodeParser extends NyaCodeParserBase {
 
 	public static class Compilation_unitContext extends ParserRuleContext {
 		public TerminalNode EOF() { return getToken(NyaCodeParser.EOF, 0); }
-		public List<TerminalNode> NYA() { return getTokens(NyaCodeParser.NYA); }
-		public TerminalNode NYA(int i) {
-			return getToken(NyaCodeParser.NYA, i);
+		public List<TerminalNode> STATEMENT() { return getTokens(NyaCodeParser.STATEMENT); }
+		public TerminalNode STATEMENT(int i) {
+			return getToken(NyaCodeParser.STATEMENT, i);
 		}
 		public Compilation_unitContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -110,11 +112,11 @@ public class NyaCodeParser extends NyaCodeParserBase {
 			setState(5);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==NYA) {
+			while (_la==STATEMENT) {
 				{
 				{
 				setState(2);
-				match(NYA);
+				match(STATEMENT);
 				}
 				}
 				setState(7);
@@ -137,7 +139,7 @@ public class NyaCodeParser extends NyaCodeParserBase {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\6\r\4\2\t\2\3\2\7"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\n\r\4\2\t\2\3\2\7"+
 		"\2\6\n\2\f\2\16\2\t\13\2\3\2\3\2\3\2\2\2\3\2\2\2\2\f\2\7\3\2\2\2\4\6\7"+
 		"\6\2\2\5\4\3\2\2\2\6\t\3\2\2\2\7\5\3\2\2\2\7\b\3\2\2\2\b\n\3\2\2\2\t\7"+
 		"\3\2\2\2\n\13\7\2\2\3\13\3\3\2\2\2\3\7";
